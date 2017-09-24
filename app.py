@@ -16,7 +16,7 @@ from RAIPython import removePunctuation
 from RAIPython import similarIntent
 from RAIPython import searchIntentInList
 
-from asic import CheckABN
+#from asic import CheckABN
 from OCRTextExtract import ExtractText
 from googlePlace import GooglePlace
 from googleDrive import createFile
@@ -24,7 +24,7 @@ from googleDrive import createFile
 from WatsonAPI import call_speech2text
 from WatsonAPI import call_visionapi
 
-from MCA import CheckMCA
+#from MCA import CheckMCA
 
 import ffmpy
 import urllib.request as req
@@ -102,23 +102,23 @@ def webhook():
                             print (message_text)
 
 
-                            if message_text.upper().strip().startswith("CHECK ABN"):
-                                MyWordList = [word.strip(string.punctuation) for word in message_text.upper().split()]
-                                if len(MyWordList) > 2:
-                                    #ABN=MyWordList[2]
-                                    ABN=''.join(MyWordList[2:])
-                                    #print(ABN)
-                                    msg_to_sender = CheckABN(sender_id, ABN)
-                                    writeFile(app_id,sender_id,"ok") # Write Intent
-                                    sendMessageJson(sender_id,msg_to_sender)
-                                else:
+                           # if message_text.upper().strip().startswith("CHECK ABN"):
+                           #     MyWordList = [word.strip(string.punctuation) for word in message_text.upper().split()]
+                           #     if len(MyWordList) > 2:
+                           #         #ABN=MyWordList[2]
+                           #         ABN=''.join(MyWordList[2:])
+                           #         #print(ABN)
+                           #         msg_to_sender = CheckABN(sender_id, ABN)
+                           #         writeFile(app_id,sender_id,"ok") # Write Intent
+                           #         sendMessageJson(sender_id,msg_to_sender)
+                           #     else:
                                     #print("Sending Message. ABN Number is Missing")
-                                    #msg_to_sender="ABN Number is Missing. Please Type Check ABN 123456789"
-                                    writeFile(app_id,sender_id,"CHECK ABN") # Write Intent
-                                    msg_to_sender="Please advise ABN"
-                                    sendMessageJson(sender_id,msg_to_sender)
+                           #         #msg_to_sender="ABN Number is Missing. Please Type Check ABN 123456789"
+                           #         writeFile(app_id,sender_id,"CHECK ABN") # Write Intent
+                           #         msg_to_sender="Please advise ABN"
+                           #         sendMessageJson(sender_id,msg_to_sender)
                                     
-                            elif message_text.upper().strip().startswith("THANK"):
+                            if message_text.upper().strip().startswith("THANK"):
                                 writeFile(app_id,sender_id,"ok") # Write Intent
                                 welcomeMessage = ['No Problem', 'You are welcome', 'I am glad that I was able to help you', 'I am glad to be your service']
                                 random_index = randrange(0,len(welcomeMessage)) 
@@ -130,24 +130,24 @@ def webhook():
                                 msg_to_sender="Please send image"
                                 sendMessageJson(sender_id,msg_to_sender)
 
-                            elif message_text.upper().strip().startswith("CHECK MCA"):
-                                MyWordList = [word.strip(string.punctuation) for word in message_text.upper().split()]
-                                if len(MyWordList) > 2:
-                                    #COMPANY=MyWordList[2]
-                                    COMPANY=' '.join(MyWordList[2:])
-                                    #print(COMPANY)
-                                    try:
-                                        msg_to_sender = CheckMCA(sender_id, COMPANY.upper())
-                                        writeFile(app_id,sender_id,"ok") # Write Intent
-                                        sendMessageJson(sender_id,msg_to_sender)
-                                    except:
-                                        sendMessageJson(sender_id,"Can't find information of " + COMPANY.upper() + " Reason : Timeout")
-                                else:
-                                    #print("Sending Message. Company Name is Missing")
-                                    #msg_to_sender="Company Name is Missing. Please Type Check MCA ROBONOMICSAI PTY LTD"
-                                    writeFile(app_id,sender_id,"CHECK MCA") # Write Intent
-                                    msg_to_sender="Please advise Company Name"
-                                    sendMessageJson(sender_id,msg_to_sender)
+                           # elif message_text.upper().strip().startswith("CHECK MCA"):
+                           #     MyWordList = [word.strip(string.punctuation) for word in message_text.upper().split()]
+                           #     if len(MyWordList) > 2:
+                           #         #COMPANY=MyWordList[2]
+                           #         COMPANY=' '.join(MyWordList[2:])
+                           #         #print(COMPANY)
+                           #         try:
+                           #             msg_to_sender = CheckMCA(sender_id, COMPANY.upper())
+                           #             writeFile(app_id,sender_id,"ok") # Write Intent
+                           #             sendMessageJson(sender_id,msg_to_sender)
+                           #         except:
+                           #             sendMessageJson(sender_id,"Can't find information of " + COMPANY.upper() + " Reason : Timeout")
+                           #     else:
+                           #         #print("Sending Message. Company Name is Missing")
+                           #         #msg_to_sender="Company Name is Missing. Please Type Check MCA ROBONOMICSAI PTY LTD"
+                           #         writeFile(app_id,sender_id,"CHECK MCA") # Write Intent
+                           #         msg_to_sender="Please advise Company Name"
+                           #         sendMessageJson(sender_id,msg_to_sender)
                                     
                             elif message_text.upper().strip().startswith("NEARBY"):
 
@@ -788,7 +788,8 @@ def callback(recipient_id, message_text):
 
 def findUserProfile(recipient_id):
     userid = recipient_id
-    pageToken='EAADkHnZAUGUIBAJpIoY5p1f4cGgmZBrrOJWkfebei8JZC86GHbvIexf8cYwMpUrOYkHSJUaIF4dzDKJ5w2ZBT4FxZCL30RWqlZAg8XzFEWG97ShACpAUu20U0hoc5sJzZBbv4jfCEXXYBZB6Hy0J0GJIIQMwHaFirnay75PsCzyZBnAZDZD'
+    pageToken='EAAUxXeZB65bIBAPIDjJrqLEy8hjTLZAPsZCPw27Vrz189q4eAjvRtuuOGW3vz6vylf1TMQBzt5Eog3YZCGMYxWVZCrhZBi0MSMVoiCG2ksS8pv8I4IhYMeuV3igJNPnJ61NpEeW7OkQRiZCFkV26rPBoKP8bhG6raDPZCbRUfdksywZDZD'
+    #pageToken='EAADkHnZAUGUIBAJpIoY5p1f4cGgmZBrrOJWkfebei8JZC86GHbvIexf8cYwMpUrOYkHSJUaIF4dzDKJ5w2ZBT4FxZCL30RWqlZAg8XzFEWG97ShACpAUu20U0hoc5sJzZBbv4jfCEXXYBZB6Hy0J0GJIIQMwHaFirnay75PsCzyZBnAZDZD'
     #conn1 = req.urlopen('https://graph.facebook.com/v2.6/'+ userid + '?fields=first_name,last_name&access_token=' + pageToken)
     url = "https://graph.facebook.com/v2.6/"+ recipient_id + "?fields=first_name,last_name&access_token=" + pageToken
     print(url)
